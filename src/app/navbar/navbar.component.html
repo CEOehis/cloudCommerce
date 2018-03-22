@@ -3,7 +3,7 @@
 
   <!-- Navbar brand -->
   <logo>
-    <a class="navbar-brand" href="#">{{appName}}</a>
+    <a class="navbar-brand" routerLink="/">{{appName}}</a>
   </logo>
 
   <!-- Collapsible content -->
@@ -12,10 +12,10 @@
     <!-- Links -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link waves-light" mdbRippleRadius>Shop All</a>
+        <a routerLink="/shopping" class="nav-link waves-light" mdbRippleRadius>Shop All</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link waves-light" mdbRippleRadius><i class="fa fa-shopping-cart"></i></a>
+        <a routerLink="/cart" class="nav-link waves-light" mdbRippleRadius><i class="fa fa-shopping-cart"></i></a>
       </li>
 
     </ul>
