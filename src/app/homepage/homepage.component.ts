@@ -13,4 +13,12 @@ export class HomepageComponent implements OnInit {
   ngOnInit() {
   }
 
+  toggleCarousel(ref) {
+    // check if carousel is auto playing
+    if(ref.isPlaying === false) {
+      return ref.play();
+    }
+    ref.pause();
+  }
+
 }
