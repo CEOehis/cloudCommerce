@@ -1,0 +1,25 @@
+footer {
+  background: teal;
+  margin-top: 100px;
+  padding: 10px 0;
+  * {
+    margin-bottom: 0;
+    // outline: 1px solid;
+  }
+  li {
+    display: inline;
+  }
+}
+
+footer>div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  ul {
+    list-style: none;
+  }
+  p, a {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+}
