@@ -12,43 +12,16 @@
   <div class="row">
     <div class="col-md-8 offset-md-2">
       <!--Carousel Wrapper-->
-      <mdb-carousel #carouselRef [isControls]="true" class="carousel slide carousel-fade" [animation]="'fade'">
-        <!--First slide-->
-        <mdb-slide>
-          <div class="view hm-black-light">
-            <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(68).jpg" alt="First slide">
-            <div class="mask waves-light" mdbRippleRadius></div>
-          </div>
+
+
+      <mdb-carousel [interval]="myInterval" [noWrap]="noWrapSlides" [(activeSlide)]="activeSlideIndex" (activeSlideChange)="activeSlideChange()" #carouselRef>
+        <mdb-slide *ngFor="let slide of slides; let index=index">
+          <img [src]="slide['image']">
           <div class="carousel-caption">
-            <h3 class="h3-responsive">Light mask</h3>
-            <p>First text</p>
+            <h4>Slide {{index}}</h4>
+            <p>{{slide['text']}}</p>
           </div>
         </mdb-slide>
-        <!--/First slide-->
-        <!--Second slide-->
-        <mdb-slide>
-          <div class="view hm-black-strong">
-            <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(6).jpg" alt="Second slide">
-            <div class="mask waves-light" mdbRippleRadius></div>
-          </div>
-          <div class="carousel-caption">
-            <h3 class="h3-responsive">Strong mask</h3>
-            <p>Secondary text</p>
-          </div>
-        </mdb-slide>
-        <!--/Second slide-->
-        <!--Third slide-->
-        <mdb-slide>
-          <div class="view hm-black-slight">
-            <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(9).jpg" alt="Third slide">
-            <div class="mask waves-light" mdbRippleRadius></div>
-          </div>
-          <div class="carousel-caption">
-            <h3 class="h3-responsive">Slight mask</h3>
-            <p>Third text</p>
-          </div>
-        </mdb-slide>
-        <!--/Third slide-->
       </mdb-carousel>
       <!--/.Carousel Wrapper-->
 
