@@ -1,3 +1,19 @@
-<p>
-  shopping works!
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+      <h4>Categories</h4>
+      <ngb-accordion #acc="ngbAccordion" [closeOthers]="true"  activeIds="ngb-panel-0">
+        <ngb-panel *ngFor="let item of itemsList" title={{item.category}}>
+          <ng-template ngbPanelContent>
+            <!-- {{item.category.subcategories}} -->
+            <ul *ngFor="let subcategory of item.subcategories">
+              <li><a (click)="log(subcategory)">{{subcategory.name}}</a></li>
+            </ul>
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+    </div>
+    <div class="col-md-9">
+    </div>
+  </div>
+</div>
