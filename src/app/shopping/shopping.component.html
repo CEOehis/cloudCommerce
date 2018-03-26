@@ -7,13 +7,33 @@
           <ng-template ngbPanelContent>
             <!-- {{item.category.subcategories}} -->
             <ul *ngFor="let subcategory of item.subcategories">
-              <li><a (click)="log(subcategory)">{{subcategory.name}}</a></li>
+              <li><a (click)="display(subcategory)">{{subcategory.name}}</a></li>
             </ul>
           </ng-template>
         </ngb-panel>
       </ngb-accordion>
     </div>
     <div class="col-md-9">
+      <h4>Showing items in {{subcategory.name}}</h4>
+      <div class="row">
+        <div class="col-md-3" *ngFor="let item of subcategory.items">
+          <div class="card">
+<!-- https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg -->
+
+            <!--Card image-->
+            <img class="" src={{item.imagelink}} alt="Card image cap">
+            <!--Card content-->
+            <div class="card-body">
+              <!--Title-->
+              <h4 class="card-title">{{item.name}}</h4>
+              <!--Text-->
+              <p class="card-text">{{item.price}}</p>
+              <a class="btn btn-primary waves-light" mdbRippleRadius>+ add to cart</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
