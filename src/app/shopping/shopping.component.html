@@ -7,7 +7,7 @@
           <ng-template ngbPanelContent>
             <!-- {{item.category.subcategories}} -->
             <ul *ngFor="let subcategory of item.subcategories">
-              <li><a (click)="display(subcategory)">{{subcategory.name}}</a></li>
+              <li><a (click)="display(subcategory , item)">{{subcategory.name}}</a></li>
             </ul>
           </ng-template>
         </ngb-panel>
@@ -16,10 +16,10 @@
     <div class="col-md-9">
       <div class="row">
         <div class="col-md-6">
-          <h4>Showing {{subcategory.items.length}} of {{subcategory.items.length}} items in {{subcategory.name}}</h4>
+          <h4>Showing {{displayedSubcategory.items.length}} of {{currentSubcategory.items.length}} items in {{currentSubcategory.name}}</h4>
         </div>
         <div class="col-md-6 ml-auto">
-          <span><input type="checkbox" name="stock" id=""> In stock only</span>
+          <span><input (change)="toggleInStock(currentSubcategory)" type="checkbox" name="stock" id=""> In stock only</span>
           <span>
             <label>Sort by:</label>
             <select>
@@ -32,18 +32,18 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-3" *ngFor="let item of subcategory.items">
+        <div class="col-md-3" *ngFor="let item of displayedSubcategory.items">
           <div class="card">
 <!-- https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg -->
 
             <!--Card image-->
             <img class="" src={{item.imagelink}} alt="Card image cap">
             <!--Card content-->
-            <div class="card-body">
+            <div class="card-body text-center">
               <!--Title-->
-              <h4 class="card-title">{{item.name}}</h4>
+              <h5 class="card-title">{{item.name}}</h5>
               <!--Text-->
-              <p class="card-text">{{item.price}}</p>
+              <p class="card-text">${{item.price.toFixed(2)}}</p>
               <a class="btn btn-primary waves-light" mdbRippleRadius>+ add to cart</a>
             </div>
 

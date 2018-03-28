@@ -1,9 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import * as data from '../itemsdata.json';
+
+interface Item {
+  name?: string,
+  price?: number,
+  imagelink?: string,
+  category?: string,
+  rating?: string,
+  subcategory?: string,
+  stock?: string,
+  description?: string
+}
+
 interface Subcategory {
   name: string,
-  items: Object[]
+  items: Item[]
 }
+
+interface Category {
+  category: string,
+  subcategories: Subcategory[]
+}
+
 
 @Component({
   selector: 'app-shopping',
@@ -14,18 +32,44 @@ interface Subcategory {
 
 export class ShoppingComponent implements OnInit {
 
-  constructor() { }
+  constructor() { 
+    
+  }
 
   ngOnInit() {
   }
-  
   public itemsList = data;
 
-  public subcategory: Subcategory = data[0].subcategories[0];
+  public currentCategory: Category = this.itemsList[0];
+  public currentSubcategory: Subcategory = this.currentCategory.subcategories[0];
+  public displayedSubcategory: Subcategory = this.currentSubcategory;
+  private stockToggle: boolean = false;
+  
 
-  display(subcategory: Subcategory) {
-    console.log(subcategory);
-    this.subcategory = subcategory;
-    console.log('sub is: ', this.subcategory);
+  // public subcategory: Subcategory = data[0].subcategories[0];
+
+  // set default initial value 
+
+  display(subcategory: Subcategory, category: Category) {
+    console.log('sub:', subcategory);
+    console.log('main:', category);
+    this.currentCategory = category;
+    this.currentSubcategory = subcategory;
+    this.displayedSubcategory = subcategory;
+  }
+
+  toggleInStock(subcategory: Subcategory) {
+    var itemsInStock = subcategory.items.filter(item => Number(item.stock) >= 1);
+    var newSub: Subcategory = {
+      name: subcategory.name,
+      items: itemsInStock
+    }
+    console.log(newSub);
+    if(this.stockToggle) {
+      this.stockToggle = false;
+      return this.displayedSubcategory = this.currentSubcategory;
+    }
+    this.displayedSubcategory = newSub;
+    this.stockToggle = true;
   }
 }
