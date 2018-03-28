@@ -56,6 +56,7 @@ export class ShoppingComponent implements OnInit {
     this.currentCategory = category;
     this.currentSubcategory = subcategory;
     this.displayedSubcategory = subcategory;
+    console.log(this.currentSubcategory);
   }
 
   toggleInStock(subcategory: Subcategory) {
@@ -67,9 +68,73 @@ export class ShoppingComponent implements OnInit {
     console.log(newSub);
     if(this.stockToggle) {
       this.stockToggle = false;
+      console.log(this.currentSubcategory);
       return this.displayedSubcategory = this.currentSubcategory;
     }
     this.displayedSubcategory = newSub;
+    console.log(this.currentSubcategory);
     this.stockToggle = true;
+  }
+
+  sortItems(e) {
+    switch (e.target.value) {
+      case 'Alphabetical':
+        console.log('alpha'); 
+        this.sortAlphabetically();
+        break;
+      case 'Price':
+        console.log('pricey'); 
+        this.sortByPrice();    
+        break;
+      case 'Rating':
+        console.log('top rated'); 
+        this.sortByRating();       
+        break;    
+      default:
+        console.log('none')
+        this.resetSorting();
+        break;
+    }
+  }
+
+  sortAlphabetically() {
+
+    let sortedItems = this.displayedSubcategory.items.sort((a, b) => {
+      if (a.name < b.name) return -1;
+      if (a.name > b.name) return 1;
+      return 0;
+    });
+    this.displayedSubcategory = {
+      name: this.displayedSubcategory.name,
+      items: sortedItems
+    }
+  }
+
+  sortByPrice() {
+    let sortedItems = this.displayedSubcategory.items.sort((a, b) => {
+      if (a.price < b.price) return -1;
+      if (a.price > b.price) return 1;
+      return 0;
+    });
+    this.displayedSubcategory = {
+      name: this.displayedSubcategory.name,
+      items: sortedItems
+    }
+  }
+
+  sortByRating() {
+    let sortedItems = this.displayedSubcategory.items.sort((a, b) => {
+      if (a.rating < b.rating) return -1;
+      if (a.rating > b.rating) return 1;
+      return 0;
+    });
+    this.displayedSubcategory = {
+      name: this.displayedSubcategory.name,
+      items: sortedItems
+    }
+  }
+
+  resetSorting() {
+    // TODO: add reset sorting algorithm
   }
 }

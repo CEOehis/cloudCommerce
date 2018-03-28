@@ -22,7 +22,7 @@
           <span><input (change)="toggleInStock(currentSubcategory)" type="checkbox" name="stock" id=""> In stock only</span>
           <span>
             <label>Sort by:</label>
-            <select>
+            <select (change)="sortItems($event)">
               <option>None</option>
               <option>Alphabetical</option>
               <option>Price</option>
