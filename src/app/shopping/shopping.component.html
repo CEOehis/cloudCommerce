@@ -7,7 +7,7 @@
           <ng-template ngbPanelContent>
             <!-- {{item.category.subcategories}} -->
             <ul *ngFor="let subcategory of item.subcategories">
-              <li><a (click)="display(subcategory , item)">{{subcategory.name}}</a></li>
+              <li><a (click)="populateProducts(subcategory)">{{subcategory.name}}</a></li>
             </ul>
           </ng-template>
         </ngb-panel>
@@ -19,10 +19,10 @@
           <h4>Showing {{displayedSubcategory.items.length}} of {{currentSubcategory.items.length}} items in {{currentSubcategory.name}}</h4>
         </div>
         <div class="col-md-6 ml-auto">
-          <span><input (change)="toggleInStock(currentSubcategory)" type="checkbox" name="stock" id=""> In stock only</span>
+          <span><input type="checkbox" (change)="toggleStock()" name="stock" id=""> In stock only</span>
           <span>
             <label>Sort by:</label>
-            <select (change)="sortItems($event)">
+            <select (change)="selectSorting($event.target.value)">
               <option>None</option>
               <option>Alphabetical</option>
               <option>Price</option>
@@ -34,10 +34,9 @@
       <div class="row">
         <div class="col-md-3" *ngFor="let item of displayedSubcategory.items">
           <div class="card">
-<!-- https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg -->
 
             <!--Card image-->
-            <img class="" src={{item.imagelink}} alt="Card image cap">
+            <a><img class="" src={{item.imagelink}} alt="Card image cap"></a>
             <!--Card content-->
             <div class="card-body text-center">
               <!--Title-->

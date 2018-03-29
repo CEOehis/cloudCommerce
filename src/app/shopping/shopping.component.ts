@@ -1,27 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { ShoppingService } from '../shopping.service';
+
 import * as data from '../itemsdata.json';
 
-interface Item {
-  name?: string,
-  price?: number,
-  imagelink?: string,
-  category?: string,
-  rating?: string,
-  subcategory?: string,
-  stock?: string,
-  description?: string
-}
-
-interface Subcategory {
-  name: string,
-  items: Item[]
-}
-
-interface Category {
-  category: string,
-  subcategories: Subcategory[]
-}
-
+import { Item } from '../item';
+import { Subcategory } from '../subCategory';
+import { Category } from '../category';
 
 @Component({
   selector: 'app-shopping',
@@ -31,110 +15,118 @@ interface Category {
 
 
 export class ShoppingComponent implements OnInit {
+  itemsList;
+  currentCategory: Category;
+  currentSubcategory: Subcategory;
+  displayedSubcategory: Subcategory;
+  private stockToggle: boolean = false;
+  private sortedBy: string = 'None';
 
-  constructor() { 
-    
+  constructor(private shoppingService: ShoppingService) { 
   }
 
   ngOnInit() {
+    this.getCategories();
+    this.currentCategory = this.itemsList[0];
+    this.currentSubcategory = this.currentCategory.subcategories[0];
+    this.displayedSubcategory = this.currentSubcategory;
+    this.stockToggle = false;
   }
-  public itemsList = data;
 
-  public currentCategory: Category = this.itemsList[0];
-  public currentSubcategory: Subcategory = this.currentCategory.subcategories[0];
-  public displayedSubcategory: Subcategory = this.currentSubcategory;
-  private stockToggle: boolean = false;
-  
+  getCategories(): void {
+    this.itemsList = this.shoppingService.getCategories();
+  }
 
-  // public subcategory: Subcategory = data[0].subcategories[0];
-
-  // set default initial value 
-
-  display(subcategory: Subcategory, category: Category) {
-    console.log('sub:', subcategory);
-    console.log('main:', category);
-    this.currentCategory = category;
+  populateProducts(subcategory: Subcategory) {
+    // check state of controls and display appropriate products
     this.currentSubcategory = subcategory;
-    this.displayedSubcategory = subcategory;
-    console.log(this.currentSubcategory);
+    // first fetch sorted products based on sort controls
+    this.displayedSubcategory = this.sortItems(this.sortedBy);
+    // conditionally get instock items of currently displayed products
+    if(this.stockToggle) {
+      this.displayedSubcategory = this.getInStock()
+    } else {
+      this.displayedSubcategory = this.displayedSubcategory;
+    }
   }
 
-  toggleInStock(subcategory: Subcategory) {
-    var itemsInStock = subcategory.items.filter(item => Number(item.stock) >= 1);
-    var newSub: Subcategory = {
-      name: subcategory.name,
+  // private method that returns the items in stock of a subcategory
+  private getInStock(): Subcategory {
+    let itemsInStock = this.displayedSubcategory.items.filter(item => +item.stock >= 1);
+    let _tempSubcategory: Subcategory = {
+      name: this.currentSubcategory.name,
       items: itemsInStock
     }
-    console.log(newSub);
-    if(this.stockToggle) {
-      this.stockToggle = false;
-      console.log(this.currentSubcategory);
-      return this.displayedSubcategory = this.currentSubcategory;
-    }
-    this.displayedSubcategory = newSub;
-    console.log(this.currentSubcategory);
-    this.stockToggle = true;
+    return _tempSubcategory;
   }
 
-  sortItems(e) {
-    switch (e.target.value) {
+  sortProducts(): Subcategory {
+    return this.sortItems(this.sortedBy);
+  }
+
+  toggleStock(): void {
+    this.stockToggle = !this.stockToggle;
+    this.populateProducts(this.currentSubcategory)
+  }
+
+  selectSorting(value: string): void {
+    this.sortedBy = value;
+    this.populateProducts(this.currentSubcategory);
+  }
+
+  sortItems(sortedBy): Subcategory {
+    switch (sortedBy) {
       case 'Alphabetical':
-        console.log('alpha'); 
-        this.sortAlphabetically();
-        break;
+        return this.sortAlphabetically();
       case 'Price':
-        console.log('pricey'); 
-        this.sortByPrice();    
-        break;
+        return this.sortByPrice();
       case 'Rating':
-        console.log('top rated'); 
-        this.sortByRating();       
-        break;    
+        return this.sortByRating();   
       default:
-        console.log('none')
-        this.resetSorting();
-        break;
+        return this.resetSorting();
     }
   }
 
-  sortAlphabetically() {
-
-    let sortedItems = this.displayedSubcategory.items.sort((a, b) => {
+  sortAlphabetically(): Subcategory {
+    let sortedItems = this.currentSubcategory.items.slice().sort((a, b) => {
       if (a.name < b.name) return -1;
       if (a.name > b.name) return 1;
       return 0;
     });
-    this.displayedSubcategory = {
-      name: this.displayedSubcategory.name,
+    let _temp: Subcategory = {
+      name: this.currentSubcategory.name,
       items: sortedItems
     }
+    return _temp;
   }
 
   sortByPrice() {
-    let sortedItems = this.displayedSubcategory.items.sort((a, b) => {
+    let sortedItems = this.currentSubcategory.items.slice().sort((a, b) => {
       if (a.price < b.price) return -1;
       if (a.price > b.price) return 1;
       return 0;
     });
-    this.displayedSubcategory = {
-      name: this.displayedSubcategory.name,
+    let _temp: Subcategory = {
+      name: this.currentSubcategory.name,
       items: sortedItems
     }
+    return _temp;
   }
 
   sortByRating() {
-    let sortedItems = this.displayedSubcategory.items.sort((a, b) => {
+    let sortedItems = this.currentSubcategory.items.slice().sort((a, b) => {
       if (a.rating < b.rating) return -1;
       if (a.rating > b.rating) return 1;
       return 0;
     });
-    this.displayedSubcategory = {
-      name: this.displayedSubcategory.name,
+    let _temp: Subcategory = {
+      name: this.currentSubcategory.name,
       items: sortedItems
     }
+    return _temp;
   }
 
-  resetSorting() {
-    // TODO: add reset sorting algorithm
+  resetSorting(): Subcategory {
+    return this.currentSubcategory;
   }
 }
