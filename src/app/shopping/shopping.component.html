@@ -36,7 +36,7 @@
           <div class="card">
 
             <!--Card image-->
-            <a><img class="" src={{item.imagelink}} alt="Card image cap"></a>
+            <a [routerLink]="['/product']" [queryParams]="{ name: item.name}"><img class="" src={{item.imagelink}} alt="Card image cap"></a>
             <!--Card content-->
             <div class="card-body text-center">
               <!--Title-->
