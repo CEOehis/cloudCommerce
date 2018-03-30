@@ -4,6 +4,21 @@
   /* Height of the footer */
 }
 
+* {
+  // outline: 1px solid;
+}
+
 .input {
   margin-bottom: 20px;
+}
+
+img {
+  max-width: 80%;
+  height: 50px;
+}
+
+.qty {
+  width: 30px;
+  padding-left: 15px;
+  // border: 1px solid;
 }

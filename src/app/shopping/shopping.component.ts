@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ShoppingService } from '../shopping.service';
+import { CartService } from '../cart.service';
 
 import * as data from '../itemsdata.json';
 
 import { Item } from '../item';
 import { Subcategory } from '../subCategory';
 import { Category } from '../category';
+
+interface CartItem extends Item {
+  qty?: number
+}
 
 @Component({
   selector: 'app-shopping',
@@ -22,7 +27,7 @@ export class ShoppingComponent implements OnInit {
   private stockToggle: boolean = false;
   private sortedBy: string = 'None';
 
-  constructor(private shoppingService: ShoppingService) { 
+  constructor(private shoppingService: ShoppingService, private cartService: CartService) { 
   }
 
   ngOnInit() {
@@ -128,5 +133,13 @@ export class ShoppingComponent implements OnInit {
 
   resetSorting(): Subcategory {
     return this.currentSubcategory;
+  }
+
+  addToCart(item) {
+    console.log('item is: ', item);
+    var cartItem: CartItem = item;
+    cartItem.qty = 1;
+    this.cartService.cart.push(cartItem);
+    console.log(this.cartService.cart);
   }
 }

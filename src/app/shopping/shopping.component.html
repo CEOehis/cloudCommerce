@@ -43,7 +43,7 @@
               <h5 class="card-title">{{item.name}}</h5>
               <!--Text-->
               <p class="card-text">${{item.price.toFixed(2)}}</p>
-              <a class="btn btn-primary waves-light" mdbRippleRadius>+ add to cart</a>
+              <a (click)="addToCart(item)" class="btn btn-primary waves-light" mdbRippleRadius>+ add to cart</a>
             </div>
 
           </div>

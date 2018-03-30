@@ -12,9 +12,9 @@
       <p>{{currentProduct.description}}</p>
       <div>
         <label>quantity</label>
-        <input type="number" value="1" class="qty"/>
+        <input type="number" [(ngModel)]="quantity" value="1" class="qty"/>
       </div>
-      <a class="btn btn-primary waves-light" mdbRippleRadius>+ add to cart</a>      
+      <a (click)="addToCart(currentProduct)" class="btn btn-primary waves-light" mdbRippleRadius>+ add to cart</a>      
     </div>
   </div>
 </div>

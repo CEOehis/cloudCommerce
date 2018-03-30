@@ -6,6 +6,11 @@ import { Location } from '@angular/common';
 import { Item } from '../item';
 import { Subcategory } from '../subCategory';
 import { ShoppingService } from '../shopping.service';
+import { CartService } from '../cart.service';
+
+interface CartItem extends Item {
+  qty?: number
+}
 
 @Component({
   selector: 'app-product',
@@ -17,10 +22,13 @@ export class ProductComponent implements OnInit {
   constructor(
     private route: ActivatedRoute, 
     private shoppingService: ShoppingService,
-    private location: Location) { }
+    private location: Location,
+    private cartService: CartService
+  ) { }
   productName: string;
   currentProduct: Item;
   itemsList;
+  quantity: number = 1;
   ngOnInit() {
     this.itemsList = this.shoppingService.getCategories();
     this.route.queryParams
@@ -49,9 +57,17 @@ export class ProductComponent implements OnInit {
     })
     return foundProduct;
   }
-
+  
   goBack() {
     this.location.back();
   }
 
+  addToCart(currentProduct) {
+    var cartItem: CartItem = currentProduct;
+    cartItem.qty = this.quantity;
+    console.log(currentProduct);
+    this.cartService.cart.push(currentProduct);
+    console.log(this.cartService.cart);
+  }
+  
 }
