@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 import { ShoppingService } from './shopping.service';
 
@@ -35,7 +36,8 @@ import { CartService } from './cart.service';
     BrowserModule,
     MDBBootstrapModule.forRoot(),
     NgbModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [ShoppingService, CartService],
