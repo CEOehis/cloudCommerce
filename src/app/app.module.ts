@@ -16,6 +16,7 @@ import { ProductComponent } from './product/product.component';
 import { CartComponent } from './cart/cart.component';
 import { ContactComponent } from './contact/contact.component';
 import { AboutComponent } from './about/about.component';
+import { CartService } from './cart.service';
 
 
 @NgModule({
@@ -37,7 +38,7 @@ import { AboutComponent } from './about/about.component';
     AppRoutingModule
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
-  providers: [ShoppingService],
+  providers: [ShoppingService, CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
