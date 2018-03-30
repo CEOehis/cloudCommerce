@@ -38,9 +38,9 @@
         <input type="tel" id="defaultFormSubscriptionEmailEx" class="input" placeholder="Enter your phone number">
       </form>
       <h5>Subtotal: ${{this.cartService.subTotal.toFixed(2)}}</h5>
-      <h5>Shipping: $0.00</h5>
-      <h5>Tax(10%): $0.00</h5>
-      <h5><b>Total: $0.00</b></h5>
+      <h5>Shipping: ${{shipping.toFixed(2)}}</h5>
+      <h5>Tax(10%): ${{(this.cartService.subTotal * 0.1).toFixed(2)}}</h5>
+      <h5><b>Total: ${{(this.cartService.subTotal + (this.cartService.subTotal * 0.1) + 10).toFixed(2)}}</b></h5>
       <div class="mt-4">
         <button class="btn btn-outline-blue" type="submit">Checkout
           <i class="fa fa-paper-plane-o ml-2"></i>

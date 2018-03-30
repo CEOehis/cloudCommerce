@@ -13,6 +13,7 @@ interface CartItem extends Item {
 export class CartComponent implements OnInit {
   cart: CartItem[] = [];
   subTotal: number;
+  shipping: number = 10;
   constructor(public cartService: CartService) { }
 
   ngOnInit() {
