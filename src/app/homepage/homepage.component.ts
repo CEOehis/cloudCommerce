@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ShoppingService } from '../shopping.service';
 
+import { Item } from '../item';
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
@@ -7,24 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageComponent implements OnInit {
   public appName: string = 'Cloud Commerce';
-  public myInterval: number = 1000;
+  public myInterval: number = 5000;
   public noWrapSlides: boolean = false;
   public activeSlideIndex: number = 0;
 
-  activeSlideChange() {
-    console.log(this.activeSlideIndex);
+  constructor(private shoppingSerivce: ShoppingService) { }
+  itemsList;
+  slideItems: Item[];
+  ngOnInit() {
+    this.itemsList = this.shoppingSerivce.getCategories();
+    this.slideItems = this.getSlideItems();
   }
 
-  public slides: Array<Object> = [
-    { "image": "https://webmppcapstone.blob.core.windows.net/vegetableimages/asparagus.jpg", "text": "baz" },
-    { "image": "https://webmppcapstone.blob.core.windows.net/breads-royaltyfree/baguette.png", "text": "barz" },
-    { "image": "https://webmppcapstone.blob.core.windows.net/babycare-royaltyfree/babyblanket.png", "text": "barz" },
-  ];
-
-
-  constructor() { }
-
-  ngOnInit() {
+  getSlideItems(): Item[] {
+    var items: Item[] = [];
+    this.itemsList.forEach(category => {
+      items.push(category.subcategories[0].items[0]);
+    });
+    return items;
   }
 
   toggleCarousel(ref) {
