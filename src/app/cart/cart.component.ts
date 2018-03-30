@@ -12,10 +12,12 @@ interface CartItem extends Item {
 })
 export class CartComponent implements OnInit {
   cart: CartItem[] = [];
-  constructor(private cartService: CartService) { }
+  subTotal: number;
+  constructor(public cartService: CartService) { }
 
   ngOnInit() {
     this.cart = this.cartService.cart;
+    this.cartService.getSubTotal();
   }
 
   removeItem(i) {
