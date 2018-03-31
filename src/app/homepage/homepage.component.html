@@ -14,7 +14,7 @@
       <!--Carousel Wrapper-->
 
 
-      <mdb-carousel [interval]="myInterval" [noWrap]="noWrapSlides" [(activeSlide)]="activeSlideIndex" #carouselRef>
+      <mdb-carousel [interval]="myInterval" [noWrap]="noWrapSlides" [(activeSlide)]="activeSlideIndex" #carouselRef  [animation]="'slide'">
         <mdb-slide *ngFor="let slideItem of slideItems; let index=index">
           <a [routerLink]="['/product']" [queryParams]="{ name: slideItem.name}" class="carousel-link"><img [src]="slideItem['imagelink']"></a>
           <div class="carousel-caption">
