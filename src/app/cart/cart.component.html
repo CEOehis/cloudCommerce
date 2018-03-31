@@ -13,7 +13,7 @@
             <th>remove</th>
           </tr>
         </thead>
-        <tbody *ngFor="let cartItem of cart; let i = index">
+        <tbody *ngFor="let cartItem of this.cartService.cart; let i = index">
           <tr>
             <td><img src={{cartItem.imagelink}} /></td>
             <td>{{cartItem.name}}</td>

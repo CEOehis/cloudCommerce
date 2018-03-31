@@ -12,7 +12,6 @@ interface CartItem extends Item {
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-  cart: CartItem[] = [];
   subTotal: number;
   shipping: number = 10;
 
@@ -26,7 +25,6 @@ export class CartComponent implements OnInit {
   constructor(public cartService: CartService) { }
 
   ngOnInit() {
-    this.cart = this.cartService.cart;
     this.cartService.getSubTotal();
 
     this.createFormControls();
