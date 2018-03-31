@@ -1,6 +1,23 @@
-p {
-  padding: 10px;
+.container {
+  padding-top: 20px;
   padding-bottom: 160px;
   /* Height of the footer */
 }
 
+.has-danger input,
+.has-danger select,
+.has-danger textarea {
+
+  border-bottom-color: red;
+}
+
+.has-success input,
+.has-success select,
+.has-success textarea {
+
+  border-bottom-color: green;
+}
+
+.form-control-feedback {
+  color: red;
+}

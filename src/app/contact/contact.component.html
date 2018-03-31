@@ -1,3 +1,70 @@
-<p>
-  contact works!
-</p>
+<div class="container">
+  <h1 class="text-center">Contact Us</h1>
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <!--Contact Form-->
+      <form novalidate [formGroup]="contactForm">
+    
+        <p class="h5 text-center mb-4">Write to us</p>
+    
+        <div class="md-form" [ngClass]="{
+          'has-danger': name.invalid && name.dirty,
+          'has-success': name.valid && name.dirty
+        }">
+          <input type="text" id="form3" class="form-control" mdbActive formControlName="name" required>
+          <label for="form3">Your name</label>
+          <div class="form-control-feedback" *ngIf="name.errors && (name.dirty || name.touched)">
+            <p *ngIf="name.errors.required">name is required</p>
+            <p *ngIf="name.errors.minlength">name must be 4 or more characters long</p>
+          </div>
+        </div>
+    
+        <div class="md-form" [ngClass]="{
+          'has-danger': email.invalid && email.dirty,
+          'has-success': email.valid && email.dirty
+        }">
+          <input type="text" id="form2" class="form-control" mdbActive formControlName="email" required>
+          <label for="form2">Your email</label>
+          <div class="form-control-feedback" *ngIf="email.errors && (email.dirty || email.touched)">
+            <p *ngIf="email.errors.required">email is required</p>
+            <p *ngIf="email.errors.email">email format incorrect</p>
+          </div>
+        </div>
+    
+        <div class="md-form" [ngClass]="{
+          'has-danger': subject.invalid && subject.dirty,
+          'has-success': subject.valid && subject.dirty
+        }">
+          <select class="form-control"mdbActive formControlName="subject" required>
+            <option value="">Please select a subject</option>
+            <option *ngFor="let subject of subjects" [value]="subject">{{subject}}</option>
+          </select>
+          <div class="form-control-feedback" *ngIf="subject.errors && (subject.dirty || subject.touched)">
+            <p *ngIf="subject.errors.required">subject is required</p>
+          </div>
+        </div>
+    
+        <div class="md-form" [ngClass]="{
+          'has-danger': message.invalid && message.dirty,
+          'has-success': message.valid && message.dirty
+        }">
+          <textarea type="text" id="form8" class="md-textarea" style="height: 100px" mdbActive  formControlName="message" required></textarea>
+          <label for="form8">Your message</label>
+          <div class="form-control-feedback" *ngIf="message.errors && (message.dirty || message.touched)">
+            <p *ngIf="message.errors.required">message is required</p>
+          </div>
+        </div>
+    
+        <div class="text-center">
+          <button class="btn btn-blue waves-light" mdbRippleRadius>Send
+            <i class="fa fa-paper-plane-o ml-1"></i>
+          </button>
+        </div>
+    
+      </form>
+      <!--Contact Form-->
+      <pre>{{contactForm.value | json}}</pre>
+
+    </div>
+  </div>
+</div>
