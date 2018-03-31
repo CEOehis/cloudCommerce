@@ -10,7 +10,7 @@ export class CartService {
   cart: CartItem[] = [];
   subTotal: number;
   shipping: number = 10;
-  total: number;  
+  total: number = 0;  
   constructor() { 
   }
 
