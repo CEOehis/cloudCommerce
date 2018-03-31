@@ -9,7 +9,7 @@ import { Item } from '../item';
 })
 export class HomepageComponent implements OnInit {
   public appName: string = 'Cloud Commerce';
-  public myInterval: number = 5000;
+  public myInterval: number = 0;
   public noWrapSlides: boolean = false;
   public activeSlideIndex: number = 0;
 
@@ -28,13 +28,14 @@ export class HomepageComponent implements OnInit {
     });
     return items;
   }
-
+  
   toggleCarousel(ref) {
     // check if carousel is auto playing
-    if(ref.isPlaying === false) {
-      return ref.play();
+    if(this.myInterval === 0) {
+      this.myInterval = 3000;
+    } else {
+      this.myInterval = 0;
     }
-    ref.pause();
   }
 
 }
