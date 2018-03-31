@@ -9,6 +9,8 @@ interface CartItem extends Item {
 export class CartService {
   cart: CartItem[] = [];
   subTotal: number;
+  shipping: number = 10;
+  total: number;  
   constructor() { 
   }
 

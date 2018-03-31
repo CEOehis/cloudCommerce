@@ -12,9 +12,6 @@ interface CartItem extends Item {
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-  subTotal: number;
-  shipping: number = 10;
-
   checkoutForm: FormGroup;
   name: FormControl;
   address: FormControl;

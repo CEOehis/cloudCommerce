@@ -70,7 +70,7 @@
         </div>
       </div>
       <h5>Subtotal: ${{this.cartService.subTotal.toFixed(2)}}</h5>
-      <h5>Shipping: ${{shipping.toFixed(2)}}</h5>
+      <h5>Shipping: <span *ngIf="this.cartService.cart.length > 0">${{this.cartService.shipping.toFixed(2)}}</span><span *ngIf="this.cartService.cart.length == 0">$0.00</span></h5>
       <h5>Tax(10%): ${{(this.cartService.subTotal * 0.1).toFixed(2)}}</h5>
       <h5><b>Total: ${{(this.cartService.subTotal + (this.cartService.subTotal * 0.1) + 10).toFixed(2)}}</b></h5>
       
