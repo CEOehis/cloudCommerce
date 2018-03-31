@@ -44,4 +44,18 @@ export class ContactComponent implements OnInit {
     })
   }
 
+  submit() {
+    if (this.contactForm.valid) {
+      var formValue = this.contactForm.value;
+      var message = `${formValue.name} thanks for contacting us. Your views matter to us! We will get back to your via: ${formValue.email}`
+      alert(message);
+      this.contactForm.reset();
+    } else {
+      Object.keys(this.contactForm.controls).forEach(field => {
+        const control = this.contactForm.get(field);
+        control.markAsTouched({ onlySelf: true });
+      });
+    }
+  }
+
 }
