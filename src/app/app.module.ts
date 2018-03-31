@@ -3,6 +3,8 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 import { ShoppingService } from './shopping.service';
 
@@ -37,7 +39,8 @@ import { CartService } from './cart.service';
     MDBBootstrapModule.forRoot(),
     NgbModule.forRoot(),
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [ShoppingService, CartService],

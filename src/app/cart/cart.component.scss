@@ -22,3 +22,20 @@ img {
   padding-left: 15px;
   // border: 1px solid;
 }
+
+.checkout input {
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+.has-danger input{
+  border-bottom-color: red;
+}
+
+.has-success input {
+  border-bottom-color: green;
+}
+
+.form-control-feedback {
+  color: red;
+}
