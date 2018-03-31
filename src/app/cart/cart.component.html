@@ -20,7 +20,7 @@
             <td>{{cartItem.price}}</td>
             <td><input (change)="this.cartService.getSubTotal()" type="number" [(ngModel)]="cartItem.qty" class="qty" /></td>
             <td>{{(cartItem.price * cartItem.qty).toFixed(2)}}</td>
-            <td><button (click)="removeItem(i); this.cartService.getSubTotal()" class="btn btn-danger btn-sm">x</button></td>
+            <td><button (click)="removeItem(i); this.cartService.getSubTotal(); this.cartService.getToTal()" class="btn btn-danger btn-sm">x</button></td>
           </tr>
 
         </tbody>

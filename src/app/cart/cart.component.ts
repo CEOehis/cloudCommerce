@@ -23,6 +23,7 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     this.cartService.getSubTotal();
+    this.cartService.getToTal();
 
     this.createFormControls();
     this.createForm();
@@ -50,15 +51,14 @@ export class CartComponent implements OnInit {
 
   processOrder() {
     if (this.checkoutForm.valid) {
-      console.log(this.checkoutForm.value)
       var formValue = this.checkoutForm.value;
-      var message = `${formValue.name} thanks for shopping with us. Your purchase worth ll has been processed and will be shipped to ${formValue.address}, ${formValue.city}!`
+      var message = `${formValue.name} thanks for shopping with us. Your purchase worth $${this.cartService.total.toFixed(2)} has been processed and will be shipped to ${formValue.address}, ${formValue.city}!`
       alert(message);
       this.checkoutForm.reset();
     } else {
-      Object.keys(this.checkoutForm.controls).forEach(field => { // {1}
-        const control = this.checkoutForm.get(field);            // {2}
-        control.markAsTouched({ onlySelf: true });       // {3}
+      Object.keys(this.checkoutForm.controls).forEach(field => {
+        const control = this.checkoutForm.get(field);
+        control.markAsTouched({ onlySelf: true });
       });
     }
   }

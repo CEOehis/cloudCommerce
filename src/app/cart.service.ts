@@ -25,4 +25,11 @@ export class CartService {
     });
     this.subTotal = sum;
   }
+
+  getToTal() {
+    var _tempTotal = this.subTotal + (this.subTotal * 0.1);
+    if(this.cart.length > 0) {
+      this.total = _tempTotal + this.shipping;
+    }
+  }
 }
