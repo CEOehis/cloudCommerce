@@ -18,6 +18,9 @@ footer>div {
   ul {
     list-style: none;
   }
+  p {
+    color: white;
+  }
   p, a {
     padding-top: 5px;
     padding-bottom: 5px;
@@ -32,3 +35,10 @@ footer {
   /* Height of the footer */
 }
 
+.nav-link {
+  color: white;
+  text-decoration: none;
+  &:hover {
+    color: blue;
+  }
+}
